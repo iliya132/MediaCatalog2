@@ -1,0 +1,39 @@
+﻿<UserControl x:Class="MediaCatalog2.Controls.TV_Card"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:localConverters="clr-namespace:MediaCatalog2.Converters"
+             mc:Ignorable="d" Width="250" Height="150" Name="CurrentControl">
+    <UserControl.Resources>
+        <localConverters:ActualWidthConverter x:Key="WidthConverter"/>
+    </UserControl.Resources>
+    <Button Margin="0" BorderThickness="0" Cursor="Hand" BorderBrush="{x:Null}" Background="{x:Null}"
+            Name="CardBtn"
+            Click="CardBtn_Click">
+        <Grid>
+            <Grid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Редактировать"
+                              Name="ContextEdit"
+                              Click="ContextEdit_Click"/>
+                    <MenuItem Header="Удалить"
+                              Name="ContextDelete"
+                              Click="ContextDelete_Click"/>
+                </ContextMenu>
+            </Grid.ContextMenu>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Image Name="TV_Image" Source="Resources/nopicture.jpg" 
+                   Grid.RowSpan="2" VerticalAlignment="Top" Stretch="Fill"/>
+            <Rectangle Fill="White" Grid.Row="1" Opacity="0.8"/>
+            <TextBlock Grid.Row="1" Margin="5" TextWrapping="WrapWithOverflow" HorizontalAlignment="Left"
+                       FontSize="14"
+                       Width="{Binding ElementName=CurrentControl, Path=ActualWidth, Converter={StaticResource WidthConverter}}"
+                       Name="NameBlock"/>
+            <Border BorderThickness="1" BorderBrush="Black" Grid.RowSpan="2" Name="CardBorder"/>
+        </Grid>
+    </Button>
+</UserControl>

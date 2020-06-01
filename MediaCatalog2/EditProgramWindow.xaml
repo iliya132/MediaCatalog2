@@ -1,0 +1,110 @@
+﻿<Window x:Class="MediaCatalog2.EditProgramWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:localConverters="clr-namespace:MediaCatalog2.Converters"
+        Title="Редактирование программы" MinHeight="350" Height="500" Width="800" WindowStyle="ToolWindow">
+    <Window.Resources>
+        <Style x:Key="LabelFont" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#404040"/>
+            <Setter Property="FontFamily" Value="Georgia"/>
+            <Setter Property="FontSize" Value="16px"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="Margin" Value="10,10,0,0"/>
+        </Style>
+        <Style x:Key="InputText" TargetType="TextBox">
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontFamily" Value="Georgia"/>
+            <Setter Property="FontSize" Value="18px"/>
+            <Setter Property="Margin" Value="10,0,0,0"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Width" Value="500"/>
+        </Style>
+        <Style x:Key="HelpText" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#FFBFBFBF"/>
+            <Setter Property="FontFamily" Value="Georgia"/>
+            <Setter Property="FontSize" Value="12px"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="Margin" Value="10,0,0,0"/>
+        </Style>
+        <localConverters:ActualWidthConverter x:Key="WidthConverter"/>
+    </Window.Resources>
+
+    <Grid Background="#FFF2F2F2">
+        <ScrollViewer VerticalScrollBarVisibility="Auto" MinHeight="400">
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition MinHeight="100"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="100"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="210"/>
+                    <ColumnDefinition Width="3*"/>
+                </Grid.ColumnDefinitions>
+
+                <!--Названия полей-->
+                <TextBlock Text="1. Название программы:" Style="{DynamicResource LabelFont}" Grid.Row="0"/>
+                <TextBlock Text="2. Описание программы:" Style="{DynamicResource LabelFont}" Grid.Row="1"/>
+                <TextBlock Text="3. Ведущие:" Style="{DynamicResource LabelFont}" Grid.Row="2"/>
+                <TextBlock Text="4. Год выпуска:" Style="{DynamicResource LabelFont}" Grid.Row="3"/>
+                <TextBlock Text="5. Путь к изображению:" Style="{DynamicResource LabelFont}" Grid.Row="4"/>
+
+                <!--Название программы-->
+                <StackPanel Margin="0,10,0,0" Grid.Column="1" Grid.Row="0">
+                    <TextBox Name="ProgramName" 
+                             Style="{DynamicResource InputText}"/>
+                    <TextBlock Name="ProgramNameLabel" 
+                               Text="Название программы" 
+                               Style="{DynamicResource HelpText}"/>
+                </StackPanel>
+
+                <!--Описание программы-->
+                <StackPanel Margin="0,10,0,0" Grid.Column="1" Grid.Row="1">
+                    <TextBox Name="ProgramDescription"
+                             TextWrapping="Wrap"
+                             AcceptsTab="True"
+                             AcceptsReturn="True"
+                             Style="{DynamicResource InputText}"
+                             MinHeight="100"/>
+                    <TextBlock Name="ProgramDescriptionLabel" Text="Описание программы" Style="{DynamicResource HelpText}"/>
+                </StackPanel>
+
+                <!--Ведущие-->
+                <StackPanel  Margin="0,10,0,0" Grid.Column="1" Grid.Row="2">
+                    <TextBox Name="Actors" 
+                             Style="{DynamicResource InputText}"/>
+                    <TextBlock Name="ActorsLabel" Text="ФИО ведущих через запятую" Style="{DynamicResource HelpText}"/>
+                </StackPanel>
+
+                <!--Год выпуска-->
+                <StackPanel Margin="0,10,0,0" Grid.Column="1" Grid.Row="3">
+                    <TextBox Name="YearEstablished" 
+                             Style="{DynamicResource InputText}"/>
+                    <TextBlock Name="YearEstablishedLabel" Text="Год выпуска программы" Style="{DynamicResource HelpText}"/>
+                </StackPanel>
+
+                <StackPanel Margin="0,10,0,0" Grid.Column="1" Grid.Row="4">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox Name="AvatarFilePath" 
+                             Style="{DynamicResource InputText}"
+                                 Width="480"/>
+                        <Button Name="OpenFile" Width="20" Height="20" Click="OpenFile_Click">
+                            <Image Source="/MediaCatalog2;component/Resources/Open.png"/>
+                        </Button>
+                    </StackPanel>
+                    
+                    <TextBlock Name="AvatarLabel" Text="Путь к изображению" Style="{DynamicResource HelpText}"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal"  HorizontalAlignment="Right" Grid.Column="1" Grid.Row="5" Margin="0,0,30,0">
+                    <Button Name="Ok_Button" Width="100" Height="40" HorizontalAlignment="Center" Content="ОК" Background="#FF75E056" Margin="10" IsDefault="True" Click="Ok_Button_Click"/>
+                    <Button Name="Cancel_Button" Width="100" Height="40" HorizontalAlignment="Center" Content="Отмена" Background="#FFCFD4CE" Margin="10" IsCancel="True"/>
+                </StackPanel>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</Window>
